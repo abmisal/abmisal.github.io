@@ -18,47 +18,6 @@
   </style>
 </head>
 <body>
-  <div id="signatureWarning" style="
-    display: none;
-    background-color: #ffcccc;
-    color: #900;
-    padding: 10px;
-    font-weight: bold;
-    text-align: center;
-    border-bottom: 2px solid #900;
-">
-    Digital signature detected — This viewer does not validate digital signatures. To verify authenticity, open in Adobe Acrobat or another trusted PDF application.
-</div>
-  <iframe id="pdfFrame" src="/Resume/web/viewer.html?file=/Ab-Resume.pdf" width="100%" height="800px" style="border: none;"></iframe>
-  <script>
-async function checkForSignature(pdfUrl) {
-    // Load PDF.js from CDN
-    const pdfjsLib = window['pdfjs-dist/build/pdf'];
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.8.69/pdf.worker.min.js';
-
-    try {
-        const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
-
-        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-            const page = await pdf.getPage(pageNum);
-            const annotations = await page.getAnnotations();
-
-            if (annotations.some(a => a.fieldType === 'Sig' || /signature/i.test(a.fieldName || ''))) {
-                document.getElementById('signatureWarning').style.display = 'block';
-                break;
-            }
-        }
-    } catch (err) {
-        console.error('Error checking signature:', err);
-    }
-}
-
-// Call with your actual PDF path
-checkForSignature('/Ab-Resume.pdf');
-</script>
-
-<!-- Load PDF.js library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.8.69/pdf.min.js"></script>
-
+  <iframe src="/Resume/web/viewer.html?file=/Ab-Resume.pdf"></iframe>
 </body>
 </html>
