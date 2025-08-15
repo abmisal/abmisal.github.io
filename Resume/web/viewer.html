@@ -37,18 +37,6 @@ See https://github.com/adobe-type-tools/cmap-resources
   </head>
 
   <body tabindex="0">
-  <div id="signatureWarning" style="
-    display: none;
-    background-color: #ffcccc;
-    color: #900;
-    padding: 10px;
-    font-weight: bold;
-    text-align: center;
-    border-bottom: 2px solid #900;
-  ">
-    Digital signature detected — This viewer does not validate digital signatures. To verify authenticity, open in Adobe Acrobat or another trusted PDF application.
-  </div>
-
     <div id="outerContainer">
       <span id="viewer-alert" class="visuallyHidden" role="alert"></span>
 
@@ -776,29 +764,5 @@ See https://github.com/adobe-type-tools/cmap-resources
 
     </div> <!-- outerContainer -->
     <div id="printContainer"></div>
-  <script>
-document.addEventListener('webviewerloaded', function() {
-    const PDFViewerApplication = window.PDFViewerApplication;
-
-    PDFViewerApplication.eventBus.on('documentloaded', async function() {
-        try {
-            const pdfDoc = PDFViewerApplication.pdfDocument;
-            const numPages = pdfDoc.numPages;
-
-            for (let pageNum = 1; pageNum <= numPages; pageNum++) {
-                const annotations = await pdfDoc.getPage(pageNum).then(p => p.getAnnotations());
-
-                // Look for "Sig" or "Signature" annotation types
-                if (annotations.some(a => a.fieldType === 'Sig' || /signature/i.test(a.fieldName || ''))) {
-                    document.getElementById('signatureWarning').style.display = 'block';
-                    break; // no need to check further
-                }
-            }
-        } catch (err) {
-            console.error('Error checking for signatures:', err);
-        }
-    });
-});
-</script>
   </body>
 </html>
