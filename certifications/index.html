@@ -26,7 +26,7 @@
     <div id="thumbnails"></div>
 
     <iframe id="certViewer"
-            src="/Resume/viewer.html?file=/certifications/3d_design_printing-18.pdf#sidebar=1&disableDownload=true">
+            src="/Resume/web/viewer.html?file=/certifications/3d_design_printing-18.pdf#sidebar=1&disableDownload=true">
     </iframe>
 
     <script>
@@ -62,7 +62,7 @@
                 div.addEventListener('click', () => {
                     const pdf = '/certifications/' + encodeURIComponent(div.dataset.pdf);
                     document.getElementById('certViewer').src =
-                        '/Resume/viewer.html?file=' + pdf +
+                        '/Resume/web/viewer.html?file=' + pdf +
                         '#sidebar=1&disableDownload=true';
                 });
 
