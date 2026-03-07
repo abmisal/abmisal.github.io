@@ -1,0 +1,46 @@
+name: Generate Certifications List
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'certifications/*.pdf'
+  workflow_dispatch:
+
+jobs:
+  generate-list:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Generate list.json
+        run: |
+          cd certifications
+          node - <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          
+          const files = fs.readdirSync('.')
+            .filter(f => f.endsWith('.pdf'))
+            .sort();
+          
+          fs.writeFileSync('list.json', JSON.stringify(files, null, 2));
+          console.log(`Generated list.json with ${files.length} PDFs`);
+          EOF
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          
+          if git diff --quiet certifications/list.json; then
+            echo "No changes to certifications/list.json"
+          else
+            git add certifications/list.json
+            git commit -m "chore: update certifications list"
+            git push
+          fi
