@@ -48,7 +48,7 @@
             files.forEach(f => {
                 const div = document.createElement('div');
                 div.className = 'thumb';
-                div.dataset.pdf = '/certifications/' + encodeURIComponent(f);
+                div.dataset.pdf = f;
 
                 const icon = document.createElement('i');
                 icon.className = 'fa fa-file-pdf-o fa-3x';
@@ -60,9 +60,9 @@
                 div.appendChild(label);
 
                 div.addEventListener('click', () => {
-                    const pdf = div.dataset.pdf;
+                    const pdf = '/certifications/' + encodeURIComponent(div.dataset.pdf);
                     document.getElementById('certViewer').src =
-                        '/Resume/viewer.html?file=' + encodeURIComponent(pdf) +
+                        '/Resume/viewer.html?file=' + pdf +
                         '#sidebar=1&disableDownload=true';
                 });
 
