@@ -411,11 +411,21 @@
                         </div>
                     </div>
                     <div class="col-lg-9">
+						<style>
+							.honeypot {
+								position: absolute;
+								left: -9999px;
+								opacity: 0;
+								pointer-events: none;
+							}
+						</style>
                         <form action="https://api.staticforms.dev/submit" method="POST" class="row contact_form">
                             <div class="col-md-6">
 							<input type="hidden" name="_subject" value="New Message From the Website.">
 							<input type="hidden" name="redirectTo" value="https://abmisal.github.io/thanks">
 							<input type="hidden" name="apiKey" value="sf_nfljgb9h7klkccjb1ha486cc">
+							  <!-- Honeypot field - positioned off-screen -->
+								<input type="text" name="honeypot" class="honeypot" tabindex="-1" autocomplete="off" />
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="Name" name="name" placeholder="Enter your name">
                                 </div>
