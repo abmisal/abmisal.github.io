@@ -19,6 +19,8 @@
         <!-- main css -->
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/responsive.css">
+		  <!-- Load reCAPTCHA script -->
+  		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </head>
     <body>
         <a name="top"></a>
@@ -411,14 +413,6 @@
                         </div>
                     </div>
                     <div class="col-lg-9">
-						<style>
-							.honeypot {
-								position: absolute;
-								left: -9999px;
-								opacity: 0;
-								pointer-events: none;
-							}
-						</style>
                         <form action="https://api.staticforms.dev/submit" method="POST" class="row contact_form">
                             <div class="col-md-6">
 							<input type="hidden" name="_subject" value="New Message From the Website.">
@@ -441,6 +435,8 @@
                                     <textarea class="form-control" name="Message" id="message" rows="1" placeholder="Enter Message"></textarea>
                                 </div>
                             </div>
+							<!-- reCAPTCHA Widget - Use your SITE KEY here -->
+    						<div class="g-recaptcha" data-sitekey="6LdQil8tAAAAAETqDKOKZ8PyOD_hfGroGTKvJSuL"></div>
                             <div class="col-md-12 text-right">
                                 <button type="submit" value="submit" class="btn submit_btn">Send Message</button>
                             </div>
